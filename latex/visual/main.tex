@@ -1,0 +1,69 @@
+
+\documentclass[12pt]{article}
+\usepackage[portuguese]{babel}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+\author{Victor Seixas Locateli}
+\title{Reconhecendo rostos através do OpenCV utilizando C++}
+\begin{document}
+	\maketitle
+	\newpage
+	\section{Entendendo o sistema de visão humana}
+	Antes de começar com o código, algoritmos complexos e afins precisamos primeiramente definir o porquê dessas funcionalidades terem sido criadas. 
+	
+	A principal função de algoritmos de visão computacional é de entender conteúdos de imagens e vídeos.
+	
+	Nós, seres humanos, fazemos de forma branda, e então vem a pergunta de como fazemos uma máquina fazer o mesmo?
+	\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=\textwidth]{human_eye}
+	\caption{Representação da visão do olho humano.}
+	\end{figure}
+	\newpage
+		\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=\textwidth]{in_depth_human_eye}
+		\caption{Representação da visão do olho humano.}
+	\end{figure}
+	O olho humano captura toda a informação que chega até ele, como cores, formas, brilho, etc.
+	Na figura 1, o olho humano captura toda a informação dos dois objetos e armazena-a.
+	Para mais informações, poderá consultar artigos e livros com o tema \textbf{Sistema de visão humana}.
+	
+	\subsection{Como humanos reconhecem objetos?}
+	
+	Se você olhar ao redor, você encontrará diversos objetos ao seu redor. Por exemplo, você provavelmente está sentado, lendo esse documento, em uma cadeira. Você não precisa de nenhum esforço mental para saber que aquilo é uma cadeira, sabe-se que aquilo representa uma cadeira.
+	
+	Um computador por outro lado, um computador acha essa tarefa extremamente difícil e pesquisadores tem trabalhado por anos para descobrir o porquê disso.
+	
+	O ser humano consegue reconhecer objetos, pois, no Cérebro possuímos a Via Visual Ventral, referente ao caminho de reconhecer objetos. Funciona de forma hierárquica.
+	
+	Podemos, também classificar a agrupar objetos em classes, de forma invariante. Quando olhamos para um objeto, extraimos somente o necessário e fatores como orientação, tamanho, perspectiva e iluminação não importam.
+	
+	Se pegarmos o exemplo citado anteriormente da cadeira, rotacionando-a 45° e dobrando-a de tamanho, continua sendo uma cadeira porque guardamos o formato e funções importantes. O computador não consegue fazer isso facilmente.
+	
+	\subsection{Por que é difícil para máquinas entenderem o conteúdo da imagem?}
+	
+	No âmbito do Machin Learning, extraímos somente partes da imagem, forncendo essas partes para o computador aprender utilizando algoritmos. Nós ainda temos as variações de tamanho, forma, perspectiva, ângulo, iluminação, etc.
+	
+	Utilizando o exemplo da cadeira, se mudamos a perspectiva, o objeto torna-se diferente para o computador. Poderiamos contornar isso utilizando todas as variações possíveis de tamanho, forma, perspectiva, ângulo, iluminação mas isso é extremamente custoso e não conseguimos dados que possam ter todas as situações possíveis. Fora o custo computacional no âmbito de tempo e memória para reconhecer a cadeira.
+	
+	Curiosamente, se ocluírmos a cadeira com uma mesa, o computador provavelmente achará que se trata de outro objeto.
+	\newpage
+	\section{Detecção de Rostos}
+	
+	O processo de detecção de rostos seria colocar um rótulo para um rosto conhecido. Assim como humanos conseguem diferenciar um familiar, de um amigo de uma celebridade, existem técnicas de reconhecimento em visão computacional.
+	
+	\begin{enumerate}
+		\item Detectação Facial: Processo de localizar a região facil na imagem. (Vide figura 3, retângulo no centro em branco.)
+		\item Processamentos Facial: Processo para ajustar a imagem para parecer mais nítida e similar a outros rostos (Vide figura 3, rosto em tons de cinza no centro superior.)
+		\item Coletando e aprendendo: Processo de coletar e aprender com rostos pré-processados.
+		\item Vê qual das pessoas coletadas é mais próxima da pessoa desejada.
+	\end{enumerate}
+	
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=\textwidth]{webcam}
+		\caption{Exemplo de detecção de rosto.}
+	\end{figure}
+\end{document}
