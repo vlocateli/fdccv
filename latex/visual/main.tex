@@ -4,7 +4,12 @@
 \usepackage{graphicx}
 \usepackage{listings}      
 \usepackage{xcolor}         
-   
+\usepackage[
+backend=biber,
+style=alphabetic,  % ou 'numeric', 'authoryear'
+]{biblatex}
+\addbibresource{referencias.bib}
+\addbibresource{ref.bib}
 \lstdefinestyle{cppstyle}{
 	language=C++,
 	basicstyle=\ttfamily\small,
@@ -161,5 +166,6 @@
 	caption={Classe Classifier},
 	]{../../src/classifier.cpp}
 	
-
+	O código foi baseado, adaptado e traduzido para C++ moderno em \textcite{opencvbook}
+	\printbibliography
 \end{document}
