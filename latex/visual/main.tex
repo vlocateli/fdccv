@@ -2,8 +2,34 @@
 \documentclass[12pt]{article}
 \usepackage[portuguese]{babel}
 \usepackage{graphicx}
-\graphicspath{ {./images/} }
+\usepackage{listings}      
+\usepackage{xcolor}         
+   
+\lstdefinestyle{cppstyle}{
+	language=C++,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue},
+	commentstyle=\color{green!60!black},
+	stringstyle=\color{red},
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	stepnumber=1,
+	numbersep=5pt,
+	backgroundcolor=\color{white},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=4,
+	frame=single,
+	rulecolor=\color{black},
+	breaklines=true,
+	breakatwhitespace=true,
+	captionpos=b,
+	escapeinside={\%*}{*)}
+}
 
+\graphicspath{ {./images/} }
+\def\code#1{\texttt{#1}}
 \author{Victor Seixas Locateli}
 \title{Reconhecendo rostos através do OpenCV utilizando C++}
 \begin{document}
@@ -59,11 +85,81 @@
 		\item Processamentos Facial: Processo para ajustar a imagem para parecer mais nítida e similar a outros rostos (Vide figura 3, rosto em tons de cinza no centro superior.)
 		\item Coletando e aprendendo: Processo de coletar e aprender com rostos pré-processados.
 		\item Vê qual das pessoas coletadas é mais próxima da pessoa desejada.
-	\end{enumerate}
+	\end{enumerate}\def\code#1{\texttt{#1}}
 	
 	\begin{figure}[ht!]
 		\centering
-		\includegraphics[width=\textwidth]{webcam}
+		\includegraphics[width=\textwidth]{detected_face}
 		\caption{Exemplo de detecção de rosto.}
 	\end{figure}
+	\newpage
+	Neste artigo, pretendemos introduzir de maneira sucinta o uso do openCV para detectar rostos.
+	
+	O primeiro passo é escolher uma imagem.
+		\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=\textwidth]{lena}
+		\caption{Imagem que utilizaremos (exemplo clássico de computação visual).}
+	\end{figure}
+	
+	Basicamente, a detectação de rosto utiliza a biblioteca OpenCV. Ela é responsável pela visão computacional, seria em algo muito curto e informal conseguir fazer o computador "enxergar". Exergar seria o ato de processar uma imagem, uma matriz de pixels, para que essa possa ser utilizada.
+	
+	Para conseguirmos utilizarmos a imagem da Figura 4, precisamos primeiramente converter a imagem para tons de cinza, como na Figura 5, pois o algoritmo só funciona com tons de cinza:
+			\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=\textwidth]{grayscaled}
+		\caption{Imagem transformada em tons de cinza.}
+	\end{figure}
+	
+	Depois, precisamos diminuir a imagem. 
+	O motivo seria desempenho. Quanto maior a imagem, maior será a matriz.
+	
+	Depois, iremos utilizar uma equalização com histograma (Figra 6), para melhorar brilho e contraste.
+				\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=\textwidth]{equalized}
+		\caption{Imagem equalizada com histograma.}
+	\end{figure}
+	
+	\section{Conversão para tons de cinza}
+	
+	Devemos somente converter para tons de cinza se temos uma imagem colorida (não em tons de cinza). Em dispositivos desktop é BGR de 3 canais, e em dispositivos móveis, é um BGRA de 4 canais. 
+	
+	\textbf{NOTA}: No OpenCV as imagems são guardadas como \textbf{BGR} (Blue-Green-Red), ordem diferente do tradicional \textbf{RGB} (Red-Green-Blue).
+	
+	\section{Diminuindo o tamanho}
+	
+	Ao diminuir o tamamnho, devemos manter o aspecto da imagem, isto é se diminuirmos o tamanho de uma imagem de 800x400 pixels, para
+	300x200 faremos a pessoa parecer magra, perdendo a fidelidade a imagem original!
+	Devemos utilizar o mesmo fator ao diminuir o tamanho.
+	
+	\section{Equalização de Histograma}
+	
+	Utilizaremos a equalização de histograma para melhorar contraste e brilho, olhando as figuras 5 e 6, respectivamente, pode parecer estranha, mas em geral tende a ajudar a detecção de rostos.
+	
+	\section{Código}
+	No código, há as classes 
+	\code{Image}, que é um \textit{wrapper} em uma \code{cv::Image} e Classifier que também é um \textit{wrapper} em \code{cv::CascadeClassifier}, para carregar o arquivo \textit{XML}. Utilizaremos a classe Classifier para classificar a imagem, utilizando um conjunto de dados já treinados para detectar rostos.
+	Basicamente, carregamos a imagem, convertemos para tons de cinza com \code{convert\_to\_greyscale)}, que ao selecionar o canal correto, converte para cinza. Depois, equlizamos com histograma.
+	Finalmente, poderemos detectar um rosto! Com a função \code{detect\_multi\_scale)} fornecemos a imagem fonte, um vetor para serem guardadas as coordenadas dos retângulos onde estarão o rostos. Utilizaremos um \code{search\_scale\_factor)} de 1,1 , pois ele demonstra quantos rostos iremos procurar (neste caso somente um!). \code{min\_neighbors}
+	determina se o detectador está certo que detectou um rosto, 4 basta e \code{min\_feature\_size} seria o tamanho mínimo da imagem para procurar. 
+	Se o tamanho do vetor é 1, temos um rosto encontrado!
+	E ele é salvo em \code{image/face\_found.jpg}.
+	
+	\lstinputlisting[
+	style=cppstyle,
+	caption={Função principal},
+	]{../../src/main.cpp}
+	
+	\lstinputlisting[
+	style=cppstyle,
+	caption={Classe Image},
+	]{../../src/image.cpp}
+	
+		\lstinputlisting[
+	style=cppstyle,
+	caption={Classe Classifier},
+	]{../../src/classifier.cpp}
+	
+
 \end{document}

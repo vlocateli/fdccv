@@ -6,7 +6,7 @@ include_directories (${OpenCV_INCLUDE_DIRS})
 link_directories (${OpenCV_LIB_DIR})
 SET (SRC src/main.cpp
          src/image.cpp
-
+         src/classifier.cpp
 )
 ADD_EXECUTABLE (${PROJECT_NAME} ${SRC})
 TARGET_LINK_LIBRARIES (${PROJECT_NAME} ${OpenCV_LIBS})
