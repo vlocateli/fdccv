@@ -1,4 +1,4 @@
-# Projeto de Computação visual - OpenCV em C++
+# Projeto de Computação visual/Inteligência Artificial- OpenCV em C++
 # Integrantes: Victor Seixas Locateli
 # RA: 10364921
 
