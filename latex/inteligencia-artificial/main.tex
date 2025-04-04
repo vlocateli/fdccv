@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+\addbibresource{bibliography.bib}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[portuguese]{babel}
+\usepackage{hyperref}
+\title{IA Relatório - Projeto 1: Uso de inteligência artificial em visão computacional}
+\author{Victor Seixas Locateli RA: 10364921}
+
+\begin{document}
+
+\maketitle
+\newpage
+\section{
+Integrantes
+}
+\begin{itemize}
+    \item Victor Seixas Locateli - RA: 10364921
+\end{itemize}
+    
+\section{
+Resumo
+}
+
+Este projeto tem como fim utilizar a inteligência artifical disponível na biblioteca OpenCV para a identificação de rostos. Pretende-se verificar a perfomance das classes disponíveis no OpenCV. A realização deste trabalho é feita em ambiente Linux, com a seguinte especificação do computador:
+\begin{itemize}
+    \item CPU: I7 7700K
+    \item RAM: 16GB 
+    \item GPU: NVIDIA 1070 OC
+\end{itemize}
+\section{Introdução}
+\subsection{
+Contextualização
+}
+
+A identificação e o uso exarcebado de inteligência artificial, por parte da população geral tem sido motivo de preocupação, principalmente por questão éticas e legais, onde o uso de uma ferramenta aparentemente inovadora e inofensiva pode ser utilizada para meios ilícitos.
+\subsection{Justificativa}
+Pretende-se demonstrar como é simples identificar um rosto com o OpenCV, isto é, demonstrar que é muito simples começar a utilizar essa ferramenta. Para substituição de um rosto, há ferramentas FOSS disponíveis, mas por questões legais quase todas foram discontinuadas. Essa facilidade mostra o quão perigoso pode ser o uso dessa ferramenta sem que instituições governamentais tomem alguma medida de punição cabível.
+\subsection{Objetivo}
+Pretende mostrar como é fácil utilizar a biblioteca OpenCV, mesmo que em uma linguagem complexa como C++. Como este projeto será usado na disciplina de \textbf{computação visual}, há um outro PDF neste repositório explicando como o código funciona.
+\subsection{Framework: OpenCV}
+Foi utilizado o Framework OpenCV para o processamento de computação visual com os filtros de deep learning disponíveis.
+\section{Descrição do Problema}
+O problema seria de indentificar rostos em imagens. Pretende-se mostrar como é fácil utilizar o framework OpenCV e com algumas linhas de código, já possui uma ferramente que consegue identificar rostos.
+\subsubsection{Aspectos éticos}
+Foi se disctuido na subseção Justificativa, sobre os aspectos éticos.
+\subsection{Dataset}
+\href{https://www.kaggle.com/datasets/kasikrit/att-database-of-faces} {Dataset de rostos da AT\&T}
+\subsection{Resultados esperados}
+Pretende-se idenfiticar os rostos e se possíveis classificar a idade e gênero, respectivamente, utilizando como referência o projeto da Webcam de \cite{cvbookpakt}
+\printbibliography
+\newpage
+\end{document} 
